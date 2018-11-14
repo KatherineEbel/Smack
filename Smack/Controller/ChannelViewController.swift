@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ChannelViewController.swift
 //  Smack
 //
 //  Created by Katherine Ebel on 11/14/18.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class ChannelViewController: UIViewController {
   override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    self.revealViewController()?.leftViewRevealWidth = self.view.frame.width - 60
   }
-
-
 }
-
