@@ -26,7 +26,7 @@ class ChannelViewController: UIViewController {
     performSegue(withIdentifier: Identifier.toLogin.rawValue, sender: self)
   }
   
-  @IBAction func unwindFromLogin(_ sender: UIStoryboardSegue) {
+  @IBAction func unwindToChannel(_ sender: UIStoryboardSegue) {
     
   }
 }

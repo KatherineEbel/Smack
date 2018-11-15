@@ -10,4 +10,5 @@ import Foundation
 
 enum Identifier: String {
   case toLogin
+  case unwindToChannel
 }
