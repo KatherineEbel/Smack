@@ -195,7 +195,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ymL-XL-3ba" userLabel="Button Stack View">
                                         <rect key="frame" x="0.0" y="232" width="260" height="77"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swi-dU-B1P">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swi-dU-B1P" customClass="RoundedButton" customModule="Smack" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
                                                 <color key="backgroundColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -206,6 +206,11 @@
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-4d-hac">
                                                 <rect key="frame" x="0.0" y="48" width="260" height="29"/>
@@ -387,6 +392,9 @@
                                                 <state key="normal" title="Choose avatar">
                                                     <color key="titleColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="chooseAvatarTapped" destination="PlH-D3-0dj" eventType="touchUpInside" id="K0I-UR-cAC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lf-u7-3Gl">
                                                 <rect key="frame" x="0.0" y="228" width="217" height="36"/>
@@ -394,13 +402,16 @@
                                                 <state key="normal" title="Generate background color">
                                                     <color key="titleColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="generateBackgroundColorTapped" destination="PlH-D3-0dj" eventType="touchUpInside" id="q29-W7-fR6"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="De2-rZ-roH" firstAttribute="width" secondItem="ZDm-20-cmW" secondAttribute="width" id="5H8-ou-AHu"/>
                                         </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="998" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwN-pE-QZY">
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="248" verticalCompressionResistancePriority="998" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DwN-pE-QZY" customClass="RoundedButton" customModule="Smack" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="468" width="261" height="40"/>
                                         <color key="backgroundColor" red="0.35686274509999999" green="0.62352941179999999" blue="0.79607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -409,6 +420,14 @@
                                         <state key="normal" title="Create Account">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="createAccountTapped" destination="PlH-D3-0dj" eventType="touchUpInside" id="qta-cv-rRl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -430,6 +449,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HCR-TV-46w"/>
                     </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="ZDm-20-cmW" id="EjD-WY-UOv"/>
+                        <outlet property="chooseAvatarButton" destination="De2-rZ-roH" id="MCG-cC-VQ7"/>
+                        <outlet property="emailTextField" destination="eud-ll-Yv5" id="ek8-dq-6lp"/>
+                        <outlet property="passwordTextfield" destination="DRW-m4-lzN" id="hJs-e6-ozO"/>
+                        <outlet property="usernameTextField" destination="8tg-O9-yUR" id="KAt-9R-ROi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1FZ-0T-ayh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="z3E-iZ-1wz" userLabel="Exit" sceneMemberID="exit"/>

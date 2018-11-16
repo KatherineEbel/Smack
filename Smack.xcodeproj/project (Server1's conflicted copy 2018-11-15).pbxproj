@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27180A5D219E31C6000ECC64 /* LoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27180A5C219E31C6000ECC64 /* LoginResult.swift */; };
 		279824EC219C8C2100E53760 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824EB219C8C2100E53760 /* GradientView.swift */; };
 		279824EF219CA91300E53760 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824EE219CA91300E53760 /* Identifiers.swift */; };
 		279824F1219CB94C00E53760 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824F0219CB94C00E53760 /* LoginViewController.swift */; };
@@ -15,7 +16,6 @@
 		27FEF41D219DE3B20054AA50 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEF41C219DE3B20054AA50 /* RoundedButton.swift */; };
 		440EEAE5219C7E32007577AD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EEAE4219C7E32007577AD /* ChatViewController.swift */; };
 		440EEAE7219C7E45007577AD /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EEAE6219C7E45007577AD /* ChannelViewController.swift */; };
-		440EEAE9219E3AF9007577AD /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EEAE8219E3AF9007577AD /* LoginResponse.swift */; };
 		44748C78219C6E1500AAF0FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44748C77219C6E1500AAF0FA /* AppDelegate.swift */; };
 		44748C7D219C6E1500AAF0FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44748C7B219C6E1500AAF0FA /* Main.storyboard */; };
 		44748C82219C6E1700AAF0FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44748C80219C6E1700AAF0FA /* LaunchScreen.storyboard */; };
@@ -25,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		1B94C48DACFAE808FD67E9BE /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		27180A5C219E31C6000ECC64 /* LoginResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResult.swift; sourceTree = "<group>"; };
 		279824EB219C8C2100E53760 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		279824EE219CA91300E53760 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		279824F0219CB94C00E53760 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		27FEF41C219DE3B20054AA50 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		440EEAE4219C7E32007577AD /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		440EEAE6219C7E45007577AD /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
-		440EEAE8219E3AF9007577AD /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		44748C74219C6E1500AAF0FA /* Smack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44748C77219C6E1500AAF0FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44748C7C219C6E1500AAF0FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		440EEAE3219C7E0B007577AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				440EEAE8219E3AF9007577AD /* LoginResponse.swift */,
+				27180A5C219E31C6000ECC64 /* LoginResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,9 +283,9 @@
 			files = (
 				279824F3219CC0CD00E53760 /* CreateAccountViewController.swift in Sources */,
 				279824F1219CB94C00E53760 /* LoginViewController.swift in Sources */,
+				27180A5D219E31C6000ECC64 /* LoginResult.swift in Sources */,
 				440EEAE5219C7E32007577AD /* ChatViewController.swift in Sources */,
 				440EEAE7219C7E45007577AD /* ChannelViewController.swift in Sources */,
-				440EEAE9219E3AF9007577AD /* LoginResponse.swift in Sources */,
 				27FEF41D219DE3B20054AA50 /* RoundedButton.swift in Sources */,
 				279824EC219C8C2100E53760 /* GradientView.swift in Sources */,
 				279824EF219CA91300E53760 /* Identifiers.swift in Sources */,
