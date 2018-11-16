@@ -9,29 +9,32 @@
 import Foundation
 import Alamofire
 
-enum UserDefaultConstants: String {
+enum UserDefaultKeys: String {
   case loggedInKey
   case tokenKey
   case userEmail
+  case avatarName = "profileDefault"
+  case avatarColor = "[0.5, 0.5, 0.5, 1]"
 }
 
 enum Endpoint {
   case register
   case login
+  case addUser
   
   func url() -> String {
     let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
     switch self {
       case .register: return "\(baseURL)account/register"
       case .login: return "\(baseURL)account/login"
+      case .addUser: return "\(baseURL)user/add"
     }
   }
   
-  func headers(authRequired: Bool = false) -> [String: String] {
+  func headers(_ token: String? = nil) -> [String: String] {
     var headers = ["Content-Type": "application/json; charset=utf-8"]
-    if authRequired {
-      // TODO:
-    }
+    guard let token = token else { return headers }
+    headers.updateValue("Bearer \(token)", forKey: "Authorization")
     return headers
   }
 }
@@ -48,42 +51,38 @@ class AuthService {
   
   var isLoggedIn: Bool {
     get {
-      return defaults.bool(forKey: UserDefaultConstants.loggedInKey.rawValue)
+      return defaults.bool(forKey: UserDefaultKeys.loggedInKey.rawValue)
     }
     set {
-      defaults.set(newValue, forKey: UserDefaultConstants.loggedInKey.rawValue)
+      defaults.set(newValue, forKey: UserDefaultKeys.loggedInKey.rawValue)
     }
   }
   
   var authToken: String {
     get {
-      return defaults.value(forKey: UserDefaultConstants.tokenKey.rawValue) as! String
+      return defaults.value(forKey: UserDefaultKeys.tokenKey.rawValue) as! String
     }
     set {
-      defaults.set(newValue, forKey: UserDefaultConstants.tokenKey.rawValue)
+      defaults.set(newValue, forKey: UserDefaultKeys.tokenKey.rawValue)
     }
   }
   
   var userEmail: String {
     get {
-      return defaults.value(forKey: UserDefaultConstants.userEmail.rawValue) as! String
+      return defaults.value(forKey: UserDefaultKeys.userEmail.rawValue) as! String
     }
     set {
-      defaults.set(newValue, forKey: UserDefaultConstants.userEmail.rawValue)
+      defaults.set(newValue, forKey: UserDefaultKeys.userEmail.rawValue)
     }
   }
   
   func registerUser(email: String, password: String, completion: @escaping CompletionHandler) {
-    let lowercaseEmail = email.lowercased()
-    let headers = [
-      "Content-Type": "application/json; charset=utf-8"
-    ]
     let body: [String: Any] = [
-      "email": lowercaseEmail,
+      "email": email.lowercased(),
       "password": password
     ]
-    
-    Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseString { response in
+    let endpoint = Endpoint.register
+    Alamofire.request(endpoint.url(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseString { response in
       switch response.result {
         case .success(let message):
           completion(true)
@@ -108,6 +107,34 @@ class AuthService {
             let result = try JSONDecoder().decode(LoginResponse.self, from: data)
             self.userEmail = result.user
             self.authToken = result.token
+            completion(true)
+          } catch {
+            print(error)
+            completion(false)
+          }
+        case .failure(let error):
+          print(error)
+          completion(false)
+      }
+    }
+  }
+  
+  func createUser(name: String, email: String,
+                  avatarName: String, avatarColor: String,
+                  completion: @escaping CompletionHandler) {
+    let body: [String: Any] = [
+      "name": name,
+      "email": email,
+      "avatarName": avatarName,
+      "avatarColor": avatarColor
+    ]
+    let endpoint = Endpoint.addUser
+    Alamofire.request(endpoint.url(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { response in
+      switch response.result {
+        case .success(let data):
+          do {
+            let user = try JSONDecoder().decode(CreateUserResponse.self, from: data)
+            CurrentUserService.instance.setUser(user: User.create(fromResponse: user))
             completion(true)
           } catch {
             print(error)

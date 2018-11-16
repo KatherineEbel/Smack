@@ -27,12 +27,16 @@ class CreateAccountViewController: UIViewController {
   @IBAction func generateBackgroundColorTapped() {
   }
   @IBAction func createAccountTapped() {
-    guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextfield.text, !password.isEmpty else { return }
+    guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextfield.text, !password.isEmpty, let name = self.usernameTextField.text, !name.isEmpty else { return }
     AuthService.instance.registerUser(email: email, password: password) { success in
       if success {
-        AuthService.instance.loginUser(email: email, password: password, completion: { success in
+        AuthService.instance.loginUser(email: email, password: password, completion: { [weak self] success in
           if success {
             print("Logged in user", AuthService.instance.authToken)
+            AuthService.instance.createUser(name: name, email: email, avatarName: UserDefaultKeys.avatarName.rawValue, avatarColor: UserDefaultKeys.avatarColor.rawValue, completion: { success in
+              print("Created user!", CurrentUserService.instance.user!)
+              self?.performSegue(withIdentifier: Identifier.unwindFromCreateAccount.rawValue, sender: nil)
+            })
           }
         })
       } else {

@@ -27,6 +27,6 @@ class ChannelViewController: UIViewController {
   }
   
   @IBAction func unwindToChannel(_ sender: UIStoryboardSegue) {
-    
+    print("Unwind segue called@")
   }
 }
