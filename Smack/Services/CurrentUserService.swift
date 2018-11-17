@@ -6,7 +6,7 @@
 //  Copyright © 2018 Katherine Ebel. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class CurrentUserService {
   static let instance = CurrentUserService()
@@ -20,4 +20,6 @@ class CurrentUserService {
   func setAvatar(avatar: Avatar) {
     user?.avatar = avatar
   }
+  
+
 }

@@ -71,6 +71,7 @@ class CreateAccountViewController: UIViewController {
     UIView.animate(withDuration: 0.2) {
       self.bgColor = UIColor(displayP3Red: r, green: g, blue: b, alpha: 1.0)
     }
+    avatar?.color = "[\(r),\(g),\(b), 1]"
   }
   @IBAction func createAccountTapped() {
     UIView.animate(withDuration: 0.5) {

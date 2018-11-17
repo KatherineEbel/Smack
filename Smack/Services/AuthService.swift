@@ -22,7 +22,7 @@ enum Endpoint {
   case login
   case addUser
   
-  func url() -> String {
+  var url: String {
     let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
     switch self {
       case .register: return "\(baseURL)account/register"
@@ -38,9 +38,6 @@ enum Endpoint {
     return headers
   }
 }
-let BASE_URL = "https://mac-dev-chat.herokuapp.com/v1/"
-
-let URL_REGISTER = "\(BASE_URL)account/register"
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
 class AuthService {
@@ -82,7 +79,7 @@ class AuthService {
       "password": password
     ]
     let endpoint = Endpoint.register
-    Alamofire.request(endpoint.url(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseString { response in
+    Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseString { response in
       switch response.result {
         case .success(let message):
           completion(true)
@@ -100,13 +97,14 @@ class AuthService {
       "password": password
     ]
     let endpoint = Endpoint.login
-    Alamofire.request(endpoint.url(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseData { response in
+    Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseData { response in
       switch response.result {
         case .success(let data):
           do {
             let result = try JSONDecoder().decode(LoginResponse.self, from: data)
             self.userEmail = result.user
             self.authToken = result.token
+            self.isLoggedIn = true
             completion(true)
           } catch {
             print(error)
@@ -129,7 +127,7 @@ class AuthService {
       "avatarColor": avatarColor
     ]
     let endpoint = Endpoint.addUser
-    Alamofire.request(endpoint.url(), method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { response in
+    Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { response in
       switch response.result {
         case .success(let data):
           do {
