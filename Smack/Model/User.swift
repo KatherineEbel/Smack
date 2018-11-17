@@ -10,12 +10,12 @@ import Foundation
 
 struct User {
   let id: String
-  var avatarName: String
-  var avatarColor: String
+  var avatar: Avatar
   var name: String
   var email: String
   
   static func create(fromResponse response: CreateUserResponse) -> User {
-    return User(id: response._id, avatarName: response.avatarName, avatarColor: response.avatarColor, name: response.name, email: response.email)
+    let avatar = Avatar.avatar(fromName: response.avatarName, andColor: response.avatarColor)
+    return User(id: response._id, avatar: avatar, name: response.name, email: response.email)
   }
 }

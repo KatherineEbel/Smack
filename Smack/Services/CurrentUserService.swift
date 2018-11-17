@@ -16,4 +16,8 @@ class CurrentUserService {
   func setUser(user: User) {
     self.user = user
   }
+  
+  func setAvatar(avatar: Avatar) {
+    user?.avatar = avatar
+  }
 }
