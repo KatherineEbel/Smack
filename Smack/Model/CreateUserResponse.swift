@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CreateUserResponse: Codable {
+struct UserResponse: Codable {
   let __v: Int32
   let avatarColor: String
   let avatarName: String

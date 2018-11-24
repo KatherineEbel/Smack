@@ -14,5 +14,10 @@ class ChatViewController: UIViewController {
   
   override func viewDidLoad() {
     menuButton.addTarget(self.revealViewController(), action: #selector(PBRevealViewController.revealLeftView), for: .touchUpInside)
+    guard AuthService.instance.isLoggedIn else { return }
+    AuthService.instance.findUserByEmail { success in
+      guard success else { return }
+      NotificationCenter.default.post(name: SmackNotification.userDataDidChange.notificationName, object: nil)
+    }
   }
 }

@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
   let id: String
   var avatar: Avatar
   var name: String
   var email: String
   
-  static func create(fromResponse response: CreateUserResponse) -> User {
+  static func create(fromResponse response: UserResponse) -> User {
     let avatar = Avatar.avatar(fromName: response.avatarName, andColor: response.avatarColor)
     return User(id: response._id, avatar: avatar, name: response.name, email: response.email)
   }

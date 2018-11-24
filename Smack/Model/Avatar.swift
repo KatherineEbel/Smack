@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum AvatarType: String {
+enum AvatarType: String, Codable {
   case dark
   case light
 }
 
-struct Avatar {
+struct Avatar: Codable {
   let id: Int
   var type: AvatarType
   var color: String?
@@ -28,8 +28,8 @@ struct Avatar {
   }
   static func avatar(fromName name: String, andColor color: String?) -> Avatar {
     let type: AvatarType = name.range(of: "dark") != nil ? .dark : .light
-    let id = name.range(of: "0") != nil ? 0 : 1
-    return Avatar(id: id, type: type, color: color)
+    let id = name.replacingOccurrences(of: type.rawValue, with: "")
+    return Avatar(id: Int(id) ?? 0, type: type, color: color)
   }
   
   func colorFromComponents() -> UIColor {

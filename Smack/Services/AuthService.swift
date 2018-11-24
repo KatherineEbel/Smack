@@ -13,7 +13,7 @@ enum UserDefaultKeys: String {
   case loggedInKey
   case tokenKey
   case userEmail
-  case avatarName = "profileDefault"
+  case avatarName = "smackProfileIcon"
   case avatarColor = "[0.5, 0.5, 0.5, 1]"
 }
 
@@ -21,6 +21,7 @@ enum Endpoint {
   case register
   case login
   case addUser
+  case userByEmail
   
   var url: String {
     let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
@@ -28,6 +29,7 @@ enum Endpoint {
       case .register: return "\(baseURL)account/register"
       case .login: return "\(baseURL)account/login"
       case .addUser: return "\(baseURL)user/add"
+      case .userByEmail: return "\(baseURL)user/byEmail"
     }
   }
   
@@ -40,6 +42,7 @@ enum Endpoint {
 }
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
+
 class AuthService {
   static let instance = AuthService()
   private init() {}
@@ -66,7 +69,7 @@ class AuthService {
   
   var userEmail: String {
     get {
-      return defaults.value(forKey: UserDefaultKeys.userEmail.rawValue) as! String
+      return defaults.value(forKey: UserDefaultKeys.userEmail.rawValue) as? String ?? ""
     }
     set {
       defaults.set(newValue, forKey: UserDefaultKeys.userEmail.rawValue)
@@ -131,13 +134,35 @@ class AuthService {
       switch response.result {
         case .success(let data):
           do {
-            let user = try JSONDecoder().decode(CreateUserResponse.self, from: data)
+            let user = try JSONDecoder().decode(UserResponse.self, from: data)
             CurrentUserService.instance.setUser(user: User.create(fromResponse: user))
             completion(true)
           } catch {
             print(error)
             completion(false)
           }
+        case .failure(let error):
+          print(error)
+          completion(false)
+      }
+    }
+  }
+  
+  func findUserByEmail(completion: @escaping CompletionHandler) {
+    let endpoint = Endpoint.userByEmail
+    let path = "\(endpoint.url)/\(userEmail)"
+    Alamofire.request(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { responseData in
+      switch responseData.result {
+        case .success(let data):
+          do {
+            let userResponse = try JSONDecoder().decode(UserResponse.self, from: data)
+            CurrentUserService.instance.setUser(user: User.create(fromResponse: userResponse))
+            completion(true)
+          } catch {
+            print(error)
+            completion(false)
+          }
+
         case .failure(let error):
           print(error)
           completion(false)

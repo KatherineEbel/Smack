@@ -19,12 +19,8 @@ class CreateAccountViewController: UIViewController {
   
   var avatar: Avatar? {
     didSet {
-      guard let user = CurrentUserService.instance.user else {
-        let newAvatar = avatar ?? Avatar(id: 0, type: .dark, color: nil)
-        avatarImageView.image = UIImage(named: newAvatar.imageName)
-        return
-      }
-      avatarImageView.image = UIImage(named: user.avatar.imageName)
+      guard let avatar = avatar else { return }
+      avatarImageView.image = UIImage(named: avatar.imageName)
     }
   }
   
@@ -55,6 +51,13 @@ class CreateAccountViewController: UIViewController {
   @objc func handleTap() {
     view.endEditing(true)
   }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == Identifier.toAvatarPicker.rawValue {
+      guard let avatarPickerVC = segue.destination as? AvatarPickerController else { return }
+      avatarPickerVC.avatar = avatar ?? Avatar(id: 0, type: .dark)
+    }
+  }
   @IBAction func chooseAvatarTapped(_ sender: UITapGestureRecognizer) {
     chooseAvatarButton.sendActions(for: .touchUpInside)
   }
@@ -71,8 +74,13 @@ class CreateAccountViewController: UIViewController {
     UIView.animate(withDuration: 0.2) {
       self.bgColor = UIColor(displayP3Red: r, green: g, blue: b, alpha: 1.0)
     }
+    guard avatar != nil else {
+      avatar = Avatar(id: 0, type: .dark, color: "[\(r),\(g),\(b), 1]")
+      return
+    }
     avatar?.color = "[\(r),\(g),\(b), 1]"
   }
+  
   @IBAction func createAccountTapped() {
     UIView.animate(withDuration: 0.5) {
       self.view.alpha = 0.4
@@ -83,7 +91,8 @@ class CreateAccountViewController: UIViewController {
       if success {
         AuthService.instance.loginUser(email: email, password: password, completion: { [weak self] success in
           if success {
-            AuthService.instance.createUser(name: name, email: email, avatarName: UserDefaultKeys.avatarName.rawValue, avatarColor: UserDefaultKeys.avatarColor.rawValue, completion: { success in
+            guard let avatar = self?.avatar, let color = avatar.color else { fatalError("No avatar!") }
+            AuthService.instance.createUser(name: name, email: email, avatarName: avatar.imageName, avatarColor: color, completion: { success in
               UIView.animate(withDuration: 0.5) {
                 self?.view.alpha = 1.0
               }

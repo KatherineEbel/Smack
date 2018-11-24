@@ -15,6 +15,8 @@
 		27B0614E219EE01C00BB77E0 /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B0614D219EE01C00BB77E0 /* AvatarCell.swift */; };
 		27B06150219EE50200BB77E0 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B0614F219EE50200BB77E0 /* Avatar.swift */; };
 		27B06152219F0F0E00BB77E0 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B06151219F0F0E00BB77E0 /* CircleImageView.swift */; };
+		27B0615521A035FC00BB77E0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B0615321A035FC00BB77E0 /* ProfileViewController.swift */; };
+		27B0615621A035FC00BB77E0 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27B0615421A035FC00BB77E0 /* ProfileViewController.xib */; };
 		27FEF41B219DC9780054AA50 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEF41A219DC9780054AA50 /* AuthService.swift */; };
 		27FEF41D219DE3B20054AA50 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEF41C219DE3B20054AA50 /* RoundedButton.swift */; };
 		440EEAE5219C7E32007577AD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EEAE4219C7E32007577AD /* ChatViewController.swift */; };
@@ -40,6 +42,8 @@
 		27B0614D219EE01C00BB77E0 /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		27B0614F219EE50200BB77E0 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		27B06151219F0F0E00BB77E0 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		27B0615321A035FC00BB77E0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		27B0615421A035FC00BB77E0 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		27FEF41A219DC9780054AA50 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		27FEF41C219DE3B20054AA50 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		440EEAE4219C7E32007577AD /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +91,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		27B0615721A0360300BB77E0 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				27B0615421A035FC00BB77E0 /* ProfileViewController.xib */,
+			);
+			path = XIB;
+			sourceTree = "<group>";
+		};
 		27FEF419219DC9630054AA50 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +116,7 @@
 				279824F0219CB94C00E53760 /* LoginViewController.swift */,
 				279824F2219CC0CD00E53760 /* CreateAccountViewController.swift */,
 				27B0614B219EDDB400BB77E0 /* AvatarPickerController.swift */,
+				27B0615321A035FC00BB77E0 /* ProfileViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -151,6 +164,7 @@
 		44748C76219C6E1500AAF0FA /* Smack */ = {
 			isa = PBXGroup;
 			children = (
+				27B0615721A0360300BB77E0 /* XIB */,
 				27FEF419219DC9630054AA50 /* Services */,
 				279824ED219CA8FE00E53760 /* Constants */,
 				44748C77219C6E1500AAF0FA /* AppDelegate.swift */,
@@ -236,6 +250,7 @@
 			files = (
 				44748C82219C6E1700AAF0FA /* LaunchScreen.storyboard in Resources */,
 				44748C8A219C6F5300AAF0FA /* Assets.xcassets in Resources */,
+				27B0615621A035FC00BB77E0 /* ProfileViewController.xib in Resources */,
 				44748C7D219C6E1500AAF0FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +323,7 @@
 				279824F1219CB94C00E53760 /* LoginViewController.swift in Sources */,
 				27B0614E219EE01C00BB77E0 /* AvatarCell.swift in Sources */,
 				440EEAEB219E490C007577AD /* CreateUserResponse.swift in Sources */,
+				27B0615521A035FC00BB77E0 /* ProfileViewController.swift in Sources */,
 				27B06150219EE50200BB77E0 /* Avatar.swift in Sources */,
 				440EEAE5219C7E32007577AD /* ChatViewController.swift in Sources */,
 				27B06152219F0F0E00BB77E0 /* CircleImageView.swift in Sources */,

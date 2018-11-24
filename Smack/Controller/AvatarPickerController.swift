@@ -19,6 +19,8 @@ class AvatarPickerController: UIViewController {
       collectionView.reloadData()
     }
   }
+  
+  var avatar: Avatar?
 
   override func viewDidLoad() {
       super.viewDidLoad()
@@ -36,7 +38,6 @@ class AvatarPickerController: UIViewController {
 extension AvatarPickerController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     guard let avatarCell = collectionView.cellForItem(at: indexPath) as? AvatarCell, let avatar = avatarCell.avatar else { return }
-    CurrentUserService.instance.setAvatar(avatar: avatar)
     
     if let createAccountVC = presentingViewController as? CreateAccountViewController {
       createAccountVC.avatar = avatar
@@ -52,9 +53,8 @@ extension AvatarPickerController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.avatarCell.rawValue, for: indexPath) as? AvatarCell else { return AvatarCell() }
-    let user = CurrentUserService.instance.user
-    let avatar = user?.avatar ?? Avatar(id: indexPath.row, type: avatarType, color: nil)
-    cell.avatar = avatar
+    let cellAvatar = Avatar(id: indexPath.row, type: avatarType, color: avatar!.color)
+    cell.avatar = cellAvatar
     return cell
   }
   

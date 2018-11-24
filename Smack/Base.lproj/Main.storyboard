@@ -142,6 +142,7 @@
                                 <rect key="frame" x="276" y="28" width="28" height="28"/>
                                 <state key="normal" image="closeButton"/>
                                 <connections>
+                                    <action selector="closeButtonTapped" destination="z4a-tp-ssz" eventType="touchUpInside" id="9R5-Dt-ogf"/>
                                     <segue destination="F5G-sa-akP" kind="unwind" identifier="unwindToChannel" unwindAction="unwindFromLogin:" id="8QX-wf-Ver"/>
                                 </connections>
                             </button>
@@ -212,6 +213,9 @@
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="logginTapped" destination="z4a-tp-ssz" eventType="touchUpInside" id="XgY-k2-cxC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-4d-hac">
                                                 <rect key="frame" x="0.0" y="48" width="260" height="29"/>
@@ -231,16 +235,27 @@
                                     <constraint firstItem="ZTD-y0-mFu" firstAttribute="width" secondItem="ymL-XL-3ba" secondAttribute="width" id="nKp-ip-OM0"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gb7-dO-n8J">
+                                <rect key="frame" x="141.5" y="205.5" width="37" height="37"/>
+                                <color key="color" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="mMy-hb-Vfo" firstAttribute="trailing" secondItem="cH3-sp-VNx" secondAttribute="trailing" constant="16" id="FbY-v7-gIC"/>
+                            <constraint firstItem="gb7-dO-n8J" firstAttribute="centerX" secondItem="ybA-q1-5Pi" secondAttribute="centerX" id="MrU-Mb-rVq"/>
+                            <constraint firstItem="gb7-dO-n8J" firstAttribute="centerY" secondItem="ybA-q1-5Pi" secondAttribute="centerY" constant="-60" id="Pty-be-c2d"/>
                             <constraint firstItem="0fH-sp-meN" firstAttribute="top" secondItem="cH3-sp-VNx" secondAttribute="bottom" constant="8" id="aMd-SN-6TY"/>
                             <constraint firstItem="cH3-sp-VNx" firstAttribute="top" secondItem="mMy-hb-Vfo" secondAttribute="top" constant="8" id="utD-6i-0MS"/>
                             <constraint firstItem="0fH-sp-meN" firstAttribute="centerX" secondItem="ybA-q1-5Pi" secondAttribute="centerX" id="wyo-hE-SgX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mMy-hb-Vfo"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="PED-BL-y7o" id="Log-A6-c8H"/>
+                        <outlet property="passwordTextField" destination="GSc-9n-zFi" id="HD8-OD-Y5s"/>
+                        <outlet property="spinner" destination="gb7-dO-n8J" id="vS6-3s-lnp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YkQ-Z7-gK7" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="F5G-sa-akP" userLabel="Exit" sceneMemberID="exit"/>
@@ -263,10 +278,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qcz-js-tXP">
-                                <rect key="frame" x="100" y="28" width="120" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="AU5-HW-4br"/>
-                                </constraints>
+                                <rect key="frame" x="75" y="28" width="170" height="29"/>
                                 <segments>
                                     <segment title="Dark"/>
                                     <segment title="Light"/>
@@ -318,6 +330,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qcz-js-tXP" firstAttribute="width" secondItem="TyY-aG-UIG" secondAttribute="width" constant="-150" id="B31-VZ-7Oc"/>
                             <constraint firstItem="Luy-oP-ZQj" firstAttribute="top" secondItem="vPv-Bv-YmQ" secondAttribute="bottom" constant="20" id="NF5-jI-83L"/>
                             <constraint firstItem="qcz-js-tXP" firstAttribute="centerX" secondItem="TyY-aG-UIG" secondAttribute="centerX" id="OTk-Li-myM"/>
                             <constraint firstItem="9Pf-oZ-OtH" firstAttribute="trailing" secondItem="Luy-oP-ZQj" secondAttribute="trailing" id="UMv-Jj-ORK"/>

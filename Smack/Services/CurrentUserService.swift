@@ -6,7 +6,7 @@
 //  Copyright © 2018 Katherine Ebel. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class CurrentUserService {
   static let instance = CurrentUserService()
@@ -21,5 +21,10 @@ class CurrentUserService {
     user?.avatar = avatar
   }
   
+  func logout() {
+    user = nil
+    AuthService.instance.isLoggedIn = false
+    NotificationCenter.default.post(name: SmackNotification.userDataDidChange.notificationName, object: nil)
+  }
 
 }
