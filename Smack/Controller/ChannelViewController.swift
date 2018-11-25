@@ -19,12 +19,27 @@ class ChannelViewController: UIViewController {
   override func viewDidLoad() {
     self.revealViewController()?.leftViewRevealWidth = self.view.frame.width - 60
     NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange), name: SmackNotification.userDataDidChange.notificationName, object:  nil)
+    SocketService.instance.getChannel { success in
+      guard success else { return }
+      self.tableView.reloadData()
+    }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    guard AuthService.instance.isLoggedIn else {
+      return
+    }
+    MessageService.instance.getAllChannels { [weak self] success in
+      guard success else { return }
+      self?.tableView.reloadData()
+    }
+  }
   func setupView() {
     guard AuthService.instance.isLoggedIn else {
       loginButton.setTitle("Login", for: .normal)
       profileImageView.image = UIImage(named: UserDefaultKeys.avatarName.rawValue)
+  
       profileImageView.backgroundColor = UIColor.clear
       return
     }
@@ -50,6 +65,11 @@ class ChannelViewController: UIViewController {
   
   @IBAction func unwindToChannel(_ sender: UIStoryboardSegue) {
     print("Unwind segue called")
+  }
+  @IBAction func addChannelTapped() {
+    let addChannelVC = AddChannelViewController()
+    addChannelVC.modalPresentationStyle = .custom
+    present(addChannelVC, animated: true, completion: nil)
   }
 }
 

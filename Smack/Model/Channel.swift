@@ -12,5 +12,12 @@ struct Channel: Codable {
   let _id: String
   let name: String
   let description: String
-  let __v: Int32
+  let __v: Int32?
+  
+  init(_id: String, name: String, description: String) {
+    self._id = _id
+    self.name = name
+    self.description = description
+    self.__v = nil
+  }
 }

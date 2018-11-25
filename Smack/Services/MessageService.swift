@@ -15,7 +15,7 @@ class MessageService {
   var channels = [Channel]()
   
   func getAllChannels(completion: @escaping CompletionHandler) {
-    let endpoint = Endpoint.channel
+    let endpoint = SmackEndpoint.channel
     Alamofire.request(endpoint.url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: endpoint.headers(AuthService.instance.authToken)).responseData { [weak self] responseData in
       switch responseData.result {
         case .success(let data):

@@ -23,6 +23,5 @@ class ChatViewController: UIViewController {
         print(MessageService.instance.channels)
       }
     }
-
   }
 }

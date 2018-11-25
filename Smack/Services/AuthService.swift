@@ -17,31 +17,7 @@ enum UserDefaultKeys: String {
   case avatarColor = "[0.5, 0.5, 0.5, 1]"
 }
 
-enum Endpoint {
-  case register
-  case login
-  case addUser
-  case userByEmail
-  case channel
-  
-  var url: String {
-    let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
-    switch self {
-      case .register: return "\(baseURL)account/register"
-      case .login: return "\(baseURL)account/login"
-      case .addUser: return "\(baseURL)user/add"
-      case .userByEmail: return "\(baseURL)user/byEmail/"
-      case .channel: return "\(baseURL)channel/"
-    }
-  }
-  
-  func headers(_ token: String? = nil) -> [String: String] {
-    var headers = ["Content-Type": "application/json; charset=utf-8"]
-    guard let token = token else { return headers }
-    headers.updateValue("Bearer \(token)", forKey: "Authorization")
-    return headers
-  }
-}
+
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
 
@@ -83,7 +59,7 @@ class AuthService {
       "email": email.lowercased(),
       "password": password
     ]
-    let endpoint = Endpoint.register
+    let endpoint = SmackEndpoint.register
     Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseString { response in
       switch response.result {
         case .success(let message):
@@ -101,7 +77,7 @@ class AuthService {
       "email": email,
       "password": password
     ]
-    let endpoint = Endpoint.login
+    let endpoint = SmackEndpoint.login
     Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers()).responseData { response in
       switch response.result {
         case .success(let data):
@@ -131,7 +107,7 @@ class AuthService {
       "avatarName": avatarName,
       "avatarColor": avatarColor
     ]
-    let endpoint = Endpoint.addUser
+    let endpoint = SmackEndpoint.addUser
     Alamofire.request(endpoint.url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { response in
       switch response.result {
         case .success(let data):
@@ -151,7 +127,7 @@ class AuthService {
   }
   
   func findUserByEmail(completion: @escaping CompletionHandler) {
-    let endpoint = Endpoint.userByEmail
+    let endpoint = SmackEndpoint.userByEmail
     let path = "\(endpoint.url)\(userEmail)"
     Alamofire.request(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { responseData in
       switch responseData.result {
