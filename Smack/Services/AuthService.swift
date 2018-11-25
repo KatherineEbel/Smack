@@ -22,6 +22,7 @@ enum Endpoint {
   case login
   case addUser
   case userByEmail
+  case channel
   
   var url: String {
     let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
@@ -29,7 +30,8 @@ enum Endpoint {
       case .register: return "\(baseURL)account/register"
       case .login: return "\(baseURL)account/login"
       case .addUser: return "\(baseURL)user/add"
-      case .userByEmail: return "\(baseURL)user/byEmail"
+      case .userByEmail: return "\(baseURL)user/byEmail/"
+      case .channel: return "\(baseURL)channel/"
     }
   }
   
@@ -150,7 +152,7 @@ class AuthService {
   
   func findUserByEmail(completion: @escaping CompletionHandler) {
     let endpoint = Endpoint.userByEmail
-    let path = "\(endpoint.url)/\(userEmail)"
+    let path = "\(endpoint.url)\(userEmail)"
     Alamofire.request(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: endpoint.headers(authToken)).responseData { responseData in
       switch responseData.result {
         case .success(let data):

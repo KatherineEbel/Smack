@@ -18,6 +18,11 @@ class ChatViewController: UIViewController {
     AuthService.instance.findUserByEmail { success in
       guard success else { return }
       NotificationCenter.default.post(name: SmackNotification.userDataDidChange.notificationName, object: nil)
+      MessageService.instance.getAllChannels { success in
+        guard success else { return }
+        print(MessageService.instance.channels)
+      }
     }
+
   }
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272600E021A9EAAC0059B2F1 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272600DF21A9EAAC0059B2F1 /* MessageService.swift */; };
+		272600E221A9EBC00059B2F1 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272600E121A9EBC00059B2F1 /* Channel.swift */; };
+		2780105921A9FB7B004C19D5 /* ChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2780105821A9FB7B004C19D5 /* ChannelCell.swift */; };
 		279824EC219C8C2100E53760 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824EB219C8C2100E53760 /* GradientView.swift */; };
 		279824EF219CA91300E53760 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824EE219CA91300E53760 /* Identifiers.swift */; };
 		279824F1219CB94C00E53760 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279824F0219CB94C00E53760 /* LoginViewController.swift */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		1B94C48DACFAE808FD67E9BE /* Pods_Smack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Smack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		272600DF21A9EAAC0059B2F1 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		272600E121A9EBC00059B2F1 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		2780105821A9FB7B004C19D5 /* ChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCell.swift; sourceTree = "<group>"; };
 		279824EB219C8C2100E53760 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		279824EE219CA91300E53760 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		279824F0219CB94C00E53760 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 			children = (
 				27FEF41A219DC9780054AA50 /* AuthService.swift */,
 				440EEAEC219E4E13007577AD /* CurrentUserService.swift */,
+				272600DF21A9EAAC0059B2F1 /* MessageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -128,6 +135,7 @@
 				27FEF41C219DE3B20054AA50 /* RoundedButton.swift */,
 				27B0614D219EE01C00BB77E0 /* AvatarCell.swift */,
 				27B06151219F0F0E00BB77E0 /* CircleImageView.swift */,
+				2780105821A9FB7B004C19D5 /* ChannelCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				440EEAEA219E490C007577AD /* CreateUserResponse.swift */,
 				440EEAEE219E4EC9007577AD /* User.swift */,
 				27B0614F219EE50200BB77E0 /* Avatar.swift */,
+				272600E121A9EBC00059B2F1 /* Channel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,7 +327,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				27B0614C219EDDB400BB77E0 /* AvatarPickerController.swift in Sources */,
+				272600E221A9EBC00059B2F1 /* Channel.swift in Sources */,
 				440EEAEF219E4EC9007577AD /* User.swift in Sources */,
+				272600E021A9EAAC0059B2F1 /* MessageService.swift in Sources */,
+				2780105921A9FB7B004C19D5 /* ChannelCell.swift in Sources */,
 				279824F3219CC0CD00E53760 /* CreateAccountViewController.swift in Sources */,
 				279824F1219CB94C00E53760 /* LoginViewController.swift in Sources */,
 				27B0614E219EE01C00BB77E0 /* AvatarCell.swift in Sources */,

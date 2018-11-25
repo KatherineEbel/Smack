@@ -12,6 +12,7 @@ import UIKit
 class ChannelViewController: UIViewController {
   @IBOutlet var loginButton: UIButton!
   @IBOutlet var profileImageView: CircleImageView!
+  @IBOutlet var tableView: UITableView!
   
   var avatar: Avatar!
   
@@ -19,11 +20,6 @@ class ChannelViewController: UIViewController {
     self.revealViewController()?.leftViewRevealWidth = self.view.frame.width - 60
     NotificationCenter.default.addObserver(self, selector: #selector(userDataDidChange), name: SmackNotification.userDataDidChange.notificationName, object:  nil)
   }
-  
-//  override func viewWillAppear(_ animated: Bool) {
-//    super.viewWillAppear(animated)
-//    setupView()
-//  }
   
   func setupView() {
     guard AuthService.instance.isLoggedIn else {
@@ -55,4 +51,24 @@ class ChannelViewController: UIViewController {
   @IBAction func unwindToChannel(_ sender: UIStoryboardSegue) {
     print("Unwind segue called")
   }
+}
+
+extension ChannelViewController: UITableViewDelegate {
+  
+}
+
+extension ChannelViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return MessageService.instance.channels.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.channelCell.rawValue, for: indexPath) as? ChannelCell else {
+      return ChannelCell()
+    }
+    cell.channel = MessageService.instance.channels[indexPath.row]
+    return cell
+  }
+  
+  
 }
