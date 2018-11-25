@@ -17,11 +17,11 @@ enum SmackEndpoint {
   
   var url: String {
     switch self {
-    case .register: return "\(SmackEndpoint.baseURL)account/register"
-    case .login: return "\(SmackEndpoint.baseURL)account/login"
-    case .addUser: return "\(SmackEndpoint.baseURL)user/add"
-    case .userByEmail: return "\(SmackEndpoint.baseURL)user/byEmail/"
-    case .channel: return "\(SmackEndpoint.baseURL)channel/"
+      case .register: return "\(SmackEndpoint.baseURL)account/register"
+      case .login: return "\(SmackEndpoint.baseURL)account/login"
+      case .addUser: return "\(SmackEndpoint.baseURL)user/add"
+      case .userByEmail: return "\(SmackEndpoint.baseURL)user/byEmail/"
+      case .channel: return "\(SmackEndpoint.baseURL)channel/"
     }
   }
   

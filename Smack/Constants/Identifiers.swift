@@ -26,10 +26,10 @@ struct Theme {
 
 enum SmackNotification: String {
   case userDataDidChange
+  case channelsLoaded
+  case channelSelected
   
   var notificationName: Notification.Name {
-    switch self {
-    case .userDataDidChange: return Notification.Name(rawValue: "userDataDidChangeØ")
-    }
+    return Notification.Name(rawValue: rawValue)
   }
 }

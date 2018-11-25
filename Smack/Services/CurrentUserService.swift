@@ -24,6 +24,7 @@ class CurrentUserService {
   func logout() {
     user = nil
     AuthService.instance.isLoggedIn = false
+    MessageService.instance.clearChannels()
     NotificationCenter.default.post(name: SmackNotification.userDataDidChange.notificationName, object: nil)
   }
 

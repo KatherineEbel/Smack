@@ -407,6 +407,7 @@
                         <viewLayoutGuide key="safeArea" id="67X-TX-dx2"/>
                     </view>
                     <connections>
+                        <outlet property="channelNameLabel" destination="Jgf-c0-aTz" id="u85-Dv-Knq"/>
                         <outlet property="menuButton" destination="TlE-Et-Efe" id="ZuS-Wk-1uP"/>
                     </connections>
                 </viewController>

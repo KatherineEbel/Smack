@@ -11,8 +11,17 @@ import Alamofire
 
 class MessageService {
   static let instance = MessageService()
-  private init() {}
+  
+  
   var channels = [Channel]()
+  var selectedChannel: Channel? {
+    didSet {
+      NotificationCenter.default.post(name: SmackNotification.channelSelected.notificationName, object: nil)
+    }
+  }
+  
+  private init() {}
+
   
   func getAllChannels(completion: @escaping CompletionHandler) {
     let endpoint = SmackEndpoint.channel
@@ -21,6 +30,7 @@ class MessageService {
         case .success(let data):
           do {
             self?.channels = try JSONDecoder().decode([Channel].self, from: data)
+            NotificationCenter.default.post(name: SmackNotification.channelsLoaded.notificationName, object: nil)
             completion(true)
           } catch {
             completion(false)
@@ -30,5 +40,9 @@ class MessageService {
           completion(false)
       }
     }
+  }
+  
+  func clearChannels() {
+    channels.removeAll()
   }
 }
