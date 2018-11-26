@@ -14,6 +14,11 @@ class SocketService: NSObject {
   let manager: SocketManager
   let socket: SocketIOClient
   
+  enum Event: String {
+    case newChannel
+    case newMessage
+  }
+  
   private override init() {
     manager = SocketManager(socketURL: URL(string: SmackEndpoint.baseURL)!)
     socket = manager.defaultSocket
@@ -29,7 +34,7 @@ class SocketService: NSObject {
   }
   
   func addChannel(name: String, description: String, completion: @escaping CompletionHandler) {
-    socket.emit("newChannel", name, description)
+    socket.emit(Event.newChannel.rawValue, name, description)
     completion(true)
   }
   
@@ -47,5 +52,11 @@ class SocketService: NSObject {
       completion(true)
       
     }
+  }
+  
+  func addMessage(body: String, userId: String, channelId: String, completion: @escaping CompletionHandler) {
+    guard let user = CurrentUserService.instance.user else { return }
+    socket.emit(Event.newMessage.rawValue, body, userId, channelId, user.name, user.avatar.imageName)
+    completion(true)
   }
 }

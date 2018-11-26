@@ -12,6 +12,7 @@ enum SmackEndpoint {
   case addUser
   case userByEmail
   case channel
+  case messageByChannel
   
   static let baseURL = "https://mac-dev-chat.herokuapp.com/v1/"
   
@@ -22,6 +23,7 @@ enum SmackEndpoint {
       case .addUser: return "\(SmackEndpoint.baseURL)user/add"
       case .userByEmail: return "\(SmackEndpoint.baseURL)user/byEmail/"
       case .channel: return "\(SmackEndpoint.baseURL)channel/"
+      case .messageByChannel: return "\(SmackEndpoint.baseURL)message/byChannel/"
     }
   }
   
