@@ -13,9 +13,12 @@ class ChatViewController: UIViewController {
   @IBOutlet var menuButton: UIButton!
   @IBOutlet var channelNameLabel: UILabel!
   @IBOutlet var messageTextField: UITextField!
+  @IBOutlet var tableView: UITableView!
   
   override func viewDidLoad() {
     view.bindToKeyboard()
+    tableView.estimatedRowHeight = 80
+    tableView.rowHeight = UITableView.automaticDimension
     let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardTap))
     view.addGestureRecognizer(tap)
     menuButton.addTarget(self.revealViewController(), action: #selector(PBRevealViewController.revealLeftView), for: .touchUpInside)
@@ -24,7 +27,6 @@ class ChatViewController: UIViewController {
     AuthService.instance.findUserByEmail { success in
       guard success else { return }
       NotificationCenter.default.post(name: SmackNotification.userDataDidChange.notificationName, object: nil)
-
     }
   }
   
@@ -72,7 +74,8 @@ class ChatViewController: UIViewController {
   
   func getSelectedChannelMessages() {
     guard let channelId = MessageService.instance.selectedChannel?._id else { return }
-    MessageService.instance.messagesForChannel(channelId: channelId) { success in
+    MessageService.instance.messagesForChannel(channelId: channelId) { [weak self] success in
+      self?.tableView.reloadData()
       print(MessageService.instance.messages)
     }
   }
@@ -86,4 +89,19 @@ class ChatViewController: UIViewController {
       self?.messageTextField.resignFirstResponder()
     }
   }
+}
+
+extension ChatViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return MessageService.instance.messages.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let messages = MessageService.instance.messages
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.messageCell.rawValue, for: indexPath) as? MessageCell else { return MessageCell() }
+    cell.message = messages[indexPath.row]
+    return cell
+  }
+  
+  
 }

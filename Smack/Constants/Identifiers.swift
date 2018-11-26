@@ -18,6 +18,7 @@ enum Identifier: String {
 enum ReuseIdentifier: String {
   case avatarCell
   case channelCell
+  case messageCell
 }
 
 struct Theme {
